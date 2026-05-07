@@ -1,0 +1,29 @@
+{
+  "name": "ispy_backend",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/CompuGlobalHyper/i_spy#readme",
+  "bugs": {
+    "url": "https://github.com/CompuGlobalHyper/i_spy/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CompuGlobalHyper/i_spy.git"
+  },
+  "license": "ISC",
+  "author": "phin",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "fs": "^0.0.1-security",
+    "multer": "^2.1.1",
+    "pg": "^8.20.0"
+  }
+}
