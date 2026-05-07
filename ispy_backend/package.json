@@ -12,10 +12,10 @@
   },
   "license": "ISC",
   "author": "phin",
-  "type": "module",
+  "type": "commonjs",
   "main": "app.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "jest"
   },
   "dependencies": {
     "cors": "^2.8.6",
