@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import Image from "../assets/ispypic.jpg"
 import Background from "../assets/background.png"
 import TargetBox from "../modules/TargetBox";
+import Menu from "../modules/Menu"
 
 
 function Home() {
@@ -31,7 +32,11 @@ function Home() {
                 <img className={ styles.bckgrdImage } src={ Background } alt="" />
                 <div className={styles.imageContainer} onClick={handleClick}>
                     { viewTargetBox ? 
-                    <TargetBox coords={coords}></TargetBox> : 
+                    <>
+                        <Menu></Menu>
+                        <TargetBox coords={coords}></TargetBox>
+                    </>
+                     : 
                     <></>}
                     <img className={ styles.image } src={ Image } alt="" />
                 </div>
