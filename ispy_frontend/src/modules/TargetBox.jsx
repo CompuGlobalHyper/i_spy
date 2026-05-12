@@ -10,7 +10,7 @@ function TargetBox({ coords }) {
         top: `${y - boxSize / 2}px`,
         left: `${x - boxSize / 2}px`,
         borderRadius: '30px',
-        border: '2px solid red',
+        border: '3px solid rgb(200, 7, 7)',
         width: `${boxSize}px`,
         height: `${boxSize}px`
 

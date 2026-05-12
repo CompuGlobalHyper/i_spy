@@ -11,6 +11,9 @@ function Home() {
     const [coords, setCoords] = useState( { x: 0, y: 0 })
     
     const handleClick = (e) => {
+        if (e.target !== e.currentTarget) {
+            return
+        }
         if (coords.x !== 0) {
             setCoords({ x: 0, y: 0})
             setViewTargetBox(false)
@@ -30,15 +33,15 @@ function Home() {
         <>
             <div className={ styles.bckgrdImageContainer}>
                 <img className={ styles.bckgrdImage } src={ Background } alt="" />
-                <div className={styles.imageContainer} onClick={handleClick}>
+                <div className={styles.imageContainer}>
+                    <Menu></Menu>
                     { viewTargetBox ? 
                     <>
-                        <Menu></Menu>
                         <TargetBox coords={coords}></TargetBox>
                     </>
                      : 
                     <></>}
-                    <img className={ styles.image } src={ Image } alt="" />
+                    <img className={ styles.image } src={ Image } alt="" onClick={handleClick}/>
                 </div>
             </div>
             

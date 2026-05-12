@@ -1,7 +1,77 @@
-.list {
-    list-style-type: none;
+.listTitle {
+    font-weight: bold;
+    background-color: rgb(255, 255, 251);
+    color: rgb(0, 0, 138);
+    border: 2px solid rgb(0, 0, 138);
+    border-radius: 8px;
+    padding: 5px 5px 5px 10px;
+    margin: 10px 0;
+}
+.checklist {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    opacity: 1;
+    flex: 1;
+    
+}
+.hiddenChecklist {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    opacity: 0;
+    flex: 1;
+}
+
+.list {
+    list-style-type: none;
+}
+
+.item {
+    border-radius: 8px;
+    padding: 5px 0px 5px 10px;
+    margin: 0px 20px 10px 10px;
+}
+
+.item::after {
+    content: attr(data-text);
+    font-weight: bold;
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+}
+
+.item:hover {
+    cursor: pointer;
+}
+.trueItem {
+    background-color: rgba(255, 255, 251, 0.646);
+    border: 2px solid rgba(0, 132, 11, 0.442);
+    color: rgba(0, 132, 11, 0.792);
+    font-weight: bold;
+}
+
+.falseItem {
+    background-color: rgb(255, 255, 251);
+    border: 2px solid rgb(178, 7, 7); 
+}
+.activeItem {
+    background-color: rgb(255, 194, 188);
+    color: rgb(178, 7, 7);
+    font-weight: bold;
+}
+.button {
+    font-weight: bold;
+    background-color: rgb(255, 255, 251);
+    color: rgb(0, 0, 138);
+    border: 2px solid rgb(0, 0, 138);
+    border-radius: 8px;
+    text-align: center;
+
 }
