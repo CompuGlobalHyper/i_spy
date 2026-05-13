@@ -1,0 +1,17 @@
+Beep 1 coords are now 378 and 269
+STOP coords are now 398 and 367
+jeep coords are now 366 and 477
+plane coords are now 697 and 121
+Beep 2 coords are now 680 and 355
+thimble 1 coords are now 701 and 701
+thimble 2 coords are now 778 and 703
+duck coords are now 908 and 662
+GO coords are now 1017 and 576
+fishTruck coords are now 1118 and 490
+birdhouse coords are now 1165 and 532
+apple coords are now 1186 and 194
+thimble 3 coords are now 1279 and 218
+thimble 4 coords are now 1238 and 617
+thimble 5 coords are now 1256 and 711
+clock coords are now 1313 and 192
+Beep 3 coords are now 1414 and 250

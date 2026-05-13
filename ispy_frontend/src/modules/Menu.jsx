@@ -8,11 +8,11 @@ function Menu() {
     const [active, setActive] = useState('clock')
 
     const clickItem = (item) => {
-        if (!item.value) {
+        if (!item.found) {
             setActive(item.key)
             console.log(`The key is now ${key}`)
         }
-        else if (item.goal && item.value !== item.goal) {
+        else if (item.goal && item.found !== item.goal) {
             setActive(item.key)
             console.log(`The key is now ${key}`)
         } else console.log('you already found that item')
@@ -28,17 +28,17 @@ function Menu() {
     }
 
     const checklist = [
-        { key: "clock", name: "A clock", value: false },
-        { key: "birdhouse", name: "A birdhouse", value: true },
-        { key: "duck", name: "A duck", value: false },
-        { key: "thimbles", name: "Five thimbles", value: 2, goal: 5 },
-        { key: "plane", name: "A plane", value: false },
-        { key: "fishTruck", name: "Two fish in a truck", value: false },
-        { key: "apple", name: "A big red apple", value: true },
-        { key: "jeep", name: "A zebra jeep", value: false },
-        { key: "stop", name: "STOP", value: false },
-        { key: "go", name: "GO", value: false },
-        { key: "beeps", name: "BEEP, BEEP, BEEP", value: 3, goal: 3 }
+        { key: "clock", name: "A clock", found: false },
+        { key: "birdhouse", name: "A birdhouse", found: true },
+        { key: "duck", name: "A duck", found: false },
+        { key: "thimbles", name: "Five thimbles", found: 2, goal: 5 },
+        { key: "plane", name: "A plane", found: false },
+        { key: "fishTruck", name: "Two fish in a truck", found: false },
+        { key: "apple", name: "A big red apple", found: true },
+        { key: "jeep", name: "A zebra jeep", found: false },
+        { key: "stop", name: "STOP", found: false },
+        { key: "go", name: "GO", found: false },
+        { key: "beeps", name: "BEEP, BEEP, BEEP", found: 3, goal: 3 }
 ]
     return (
         <>
@@ -46,23 +46,23 @@ function Menu() {
                 <ul className={styles.list}>
                     <div className={styles.listTitle}>What do you spy?</div>
                     {checklist.map((item) => {
-                        if (typeof item.value === 'number') {
+                        if (typeof item.found === 'number') {
                             return (
                             <li key={item.key}
                                 data-text={item.name}
                                 className=
-                                {[item.value === item.goal ? styles.trueItem : styles.falseItem, 
+                                {[item.found === item.goal ? styles.trueItem : styles.falseItem, 
                                   item.key === active ? styles.activeItem : '', 
                                   styles.item].join(' ')}
                                   onClick={() => {clickItem(item)}}>
-                                {`${item.name}`}<div>{`(Found: ${item.value})`}</div>
+                                {`${item.name}`}<div>{`(Found: ${item.found})`}</div>
                             </li>
                             )}
                         else {
                             return (
                             <li key={item.key} 
                                 data-text={item.name}
-                                className={[item.value ? styles.trueItem : styles.falseItem, 
+                                className={[item.found ? styles.trueItem : styles.falseItem, 
                                   item.key === active ? styles.activeItem : '', 
                                   styles.item].join(' ')
                                   } onClick={() => {clickItem(item)}}>
