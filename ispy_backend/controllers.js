@@ -11,6 +11,9 @@ const controller = {
     testPost(req, res) {
         array.push(req.body.name)
         res.send('success!')
+    },
+    checklistPut(req, res) {
+        res.status(200).json({message: "You tried to update the checklist"})
     }
 
 }

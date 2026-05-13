@@ -26,3 +26,11 @@ test("route to test working", done => {
         .expect({ array: ['Phin'] }, done)
     })
 })
+
+test("checklist route working", done => {
+    request(app)
+    .put('/checklist')
+    .send({ item: 'exampleItem' })
+    .expect({ message: 'You tried to update the checklist' })
+    .expect(200, done)
+})

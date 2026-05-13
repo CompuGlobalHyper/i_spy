@@ -8,5 +8,6 @@ router.get('/', controller.indexGet)
 router.get('/test', controller.testGet)
 router.post('/test', controller.testPost)
 
+router.put('/checklist', controller.checklistPut)
 
 module.exports = router
