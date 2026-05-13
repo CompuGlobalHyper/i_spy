@@ -7,7 +7,8 @@ router.get('/', controller.indexGet)
 
 router.get('/test', controller.testGet)
 router.post('/test', controller.testPost)
+router.put('/checklist', controller.testChecklistPut)
 
-router.put('/checklist', controller.checklistPut)
+router.put('/checklist', controller.testChecklistPut)
 
 module.exports = router
