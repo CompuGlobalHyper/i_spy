@@ -1,4 +1,4 @@
-export const checklist = [
+module.exports = [
     {
         key: "clock",
         name: "A clock",
@@ -21,43 +21,38 @@ export const checklist = [
     },
 
     {
-        key: "thimble1",
-        group: "thimbles",
+        key: "thimbles",
         name: "Five thimbles",
-        found: false,
-        location: { x: 701, y: 701 }
-    },
-
-    {
-        key: "thimble2",
-        group: "thimbles",
-        name: "Five thimbles",
-        found: false,
-        location: { x: 778, y: 703 }
-    },
-
-    {
-        key: "thimble3",
-        group: "thimbles",
-        name: "Five thimbles",
-        found: false,
-        location: { x: 1279, y: 218 }
-    },
-
-    {
-        key: "thimble4",
-        group: "thimbles",
-        name: "Five thimbles",
-        found: false,
-        location: { x: 1238, y: 617 }
-    },
-
-    {
-        key: "thimble5",
-        group: "thimbles",
-        name: "Five thimbles",
-        found: false,
-        location: { x: 1256, y: 711 }
+        found: 0,
+        goal: 5,
+        multi: true,
+        items: [
+            {
+                key: "thimble1",
+                found: false,
+                location: { x: 701, y: 701 }
+            },
+            {
+                key: "thimble2",
+                found: false,
+                location: { x: 778, y: 703 }
+            },
+            {
+                key: "thimble3",
+                found: false,
+                location: { x: 1279, y: 218 }
+            },
+            {
+                key: "thimble4",
+                found: false,
+                location: { x: 1238, y: 617 }
+            },
+            {
+                key: "thimble5",
+                found: false,
+                location: { x: 1256, y: 711 }
+            }
+        ]
     },
 
     {
@@ -103,28 +98,27 @@ export const checklist = [
     },
 
     {
-        key: "beep1",
-        group: "beeps",
+        key: "beeps",
         name: "BEEP, BEEP, BEEP",
-        found: false,
-        location: { x: 378, y: 269 }
-    },
-
-    {
-        key: "beep2",
-        group: "beeps",
-        name: "BEEP, BEEP, BEEP",
-        found: false,
-        location: { x: 680, y: 355 }
-    },
-
-    {
-        key: "beep3",
-        group: "beeps",
-        name: "BEEP, BEEP, BEEP",
-        found: false,
-        location: { x: 1414, y: 250 }
+        found: 0,
+        goal: 3,
+        multi: true,
+        items: [
+            {
+                key: "beep1",
+                found: false,
+                location: { x: 378, y: 269 }
+            },
+            {
+                key: "beep2",
+                found: false,
+                location: { x: 680, y: 355 }
+            },
+            {
+                key: "beep3",
+                found: false,
+                location: { x: 1414, y: 250 }
+            }
+        ]
     }
 ]
-
-module.exports = { checklist }

@@ -2,28 +2,77 @@ import { useState, useEffect } from 'react'
 import styles from './styles/Menu.module.css'
 import Dialog from './Dialog';
 
+const createMessage = (string) => {
+    setMessages(prev => {
+        const next = [...prev]
+        if (next.length === 4) {
+            next.shift()
+        }
+        next.push(`${string}`)
+        return next
+    })
+}
 
 
-function Menu() {
+function Menu({ coords }) {
+    //internal url
     const apiUrl = import.meta.env.VITE_API_URL;
+    //coords passed down from Home
+    const { x, y } = coords
+    //function for creating messages
+    const createMessage = (string) => {
+        setMessages(prev => {
+            const next = [...prev]
+            if (next.length === 4) {
+                next.shift()
+            }
+            next.push(`${string}`)
+            return next
+        })
+    }
+
+
+    
+    
     //selecting an item
-    const [active, setActive] = useState('')
     const onClick = async (e ,item) => {
-        console.log(item)
+        
+        //if no answer is chosen
+        if (x === 0 && y === 0) {
+            createMessage('Please select an object in the picture..')
+            return
+        }
+        const guess = { key: item.key, x: x, y: y}
         const res = await fetch(`${apiUrl}/checklist`,
             {   method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    item
+                    guess
                 })
              }
         )
+        
         //test response
-        const result = true
-        const key = item.key
-        if (!item.found && result) {
+        const data = await res.json()
+        console.log(data)
+        
+        const result = data.found
+        console.log(result)
+        const key = data.key
+        if (item.goal && item.found !== item.goal && result) {
+            setChecklist(prev => 
+                prev.map(item => 
+                    item.key === key ?
+                    { ...item, found: item.found + 1}
+                    : item
+                )
+            )
+            
+            console.log(`The key is now ${key}`)
+        }
+        else if (!item.found && result) {
             //ask the backend, you found it!
             setChecklist(prev => 
                 prev.map(item => 
@@ -32,21 +81,18 @@ function Menu() {
                     : item
                 )
             )
-            //set message
-            setMessages(prev => {
-                const next = [...prev]
-                if (next.length === 4) {
-                    next.shift()
-                }
-                next.push(`You found "${item.name}"`)
-                return next
-                
-            })
+            createMessage(`You found "${item.name}"!`)
+        } 
+        //if answer is correct but item was already found
+        else if (result ){
+            createMessage(`You already found "${item.name}"`)
+            console.log('you already found that item')
+        } 
+        //if item was not found
+        else {
+            createMessage(`Nothing there, keep looking!`)
+            console.log('wrong answer')
         }
-        else if (item.goal && item.found !== item.goal) {
-            setActive(item.key)
-            console.log(`The key is now ${key}`)
-        } else console.log('you already found that item') 
     }
     //sending the message list to the dialog window
     const [messages, setMessages]= useState(['Welcome to digital iSpy, start searching!'])
@@ -82,9 +128,8 @@ function Menu() {
                                 data-text={item.name}
                                 className=
                                 {[item.found === item.goal ? styles.trueItem : styles.falseItem, 
-                                  item.key === active ? styles.activeItem : '', 
                                   styles.item].join(' ')}
-                                  onClick={(e) => {onClick(e, item)}}>
+                                  onClick={(e) => {onClick(e, item, x, y)}}>
                                 {`${item.name}`}<div>{`(Found: ${item.found})`}</div>
                             </li>
                             )}
@@ -93,9 +138,8 @@ function Menu() {
                             <li key={item.key} 
                                 data-text={item.name}
                                 className={[item.found ? styles.trueItem : styles.falseItem, 
-                                  item.key === active ? styles.activeItem : '', 
                                   styles.item].join(' ')
-                                  } onClick={(e) => {onClick(e, item)}}>
+                                  } onClick={(e) => {onClick(e, item, x, y)}}>
                                     {item.name}
                             </li>
                             )

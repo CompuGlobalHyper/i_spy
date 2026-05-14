@@ -34,7 +34,7 @@ function Home() {
             <div className={ styles.bckgrdImageContainer}>
                 <img className={ styles.bckgrdImage } src={ Background } alt="" />
                 <div className={styles.imageContainer}>
-                    <Menu></Menu>
+                    <Menu coords={coords}></Menu>
                     { viewTargetBox ? 
                     <>
                         <TargetBox coords={coords}></TargetBox>
