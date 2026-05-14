@@ -1,4 +1,5 @@
-const checklist = require('./checklist.js')
+let checklist = require('./checklist.js')
+const _ = require('lodash')
 
 //array for testing
 const array = []
@@ -7,9 +8,8 @@ const coordChecker = (x, y, guessX, guessY) => {
     const radius = 40
     const dx = guessX - x
     const dy = guessY - y
-
     if ((dx * dx) + (dy * dy) < radius * radius) {
-        console.log("hit")
+        console.log("answer found")
         return true
     } else return false
 }
@@ -27,45 +27,43 @@ const controller = {
         const guessKey = guess.key
         const guessX = guess.x
         const guessY = guess.y
-
-        const answerArray = checklist.filter((item) => item.key === guessKey)
-        const answer = answerArray[0]
-        const trueKey = answer.key
-        if (answer.multi) {
-            const answerList = answer.items
-            console.log(answerList)
-            const dataList = answerList
-            .filter(item => item.found === false)
-            .filter(item => {
-                const x = item.location.x
-                const y = item.location.y
-                return coordChecker(x, y, guessX, guessY)
-            })
-            if (dataList.length > 0) {
-                checklist.map(item => {
+        //search for the correct item
+            const newChecklist = checklist.map(item => {
+                //if guess matches current item
+                if (item.key === guessKey) {
+                    //if item is a set
                     if (item.multi) {
-
+                        const updatedSubItems = item.items.map((subItem) => {
+                            const x = subItem.location.x
+                            const y = subItem.location.y
+                            //if subItem matches coords
+                            if (coordChecker(x, y, guessX, guessY)) {
+                                return {...subItem, found: true}
+                            } else return subItem
+                        })
+                        //if no match was found
+                        if (_.isEqual(item.items, updatedSubItems)) {
+                            return item
+                        } else {
+                            const oldCount = item.found
+                            return {...item, found: oldCount + 1, items: updatedSubItems}
+                        }
+                    } else {
+                        const x = item.location.x
+                        const y = item.location.y
+                        //if item matches coords
+                        if (coordChecker(x, y, guessX, guessY)) {
+                            return {...item, found: true}
+                        } else return item
                     }
-                })
-                return res.status(200).json({key: trueKey, found: true})
-            } else return res.status(200).json({key: trueKey, found: false})
-            
-        } else {
-            const x = answer.location.x
-            const y = answer.location.y
-            console.log(x)
-            if (coordChecker(x, y, guessX, guessY)) {
-                const data = { key: answer.key, found: true}
-                console.log(data)
-                return res.status(200).json(data)
-            } else {
-                const data = { key: answer.key, found: false}
-                console.log(data)
-                return res.status(200).json(data)
-            }
+                } else return item
+            })
+        //if checklist has changed
+        const isFound = !_.isEqual(newChecklist, checklist)
+        if (isFound) {
+            checklist = newChecklist
         }
-        
-
+        return res.status(200).json({key: guessKey, found: isFound})
     },
     //tests
     testGet(req, res) {

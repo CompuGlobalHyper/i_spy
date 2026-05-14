@@ -14,6 +14,8 @@ const createMessage = (string) => {
 }
 
 
+
+
 function Menu({ coords }) {
     //internal url
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -30,6 +32,12 @@ function Menu({ coords }) {
             return next
         })
     }
+    //function for retrieving up-to-date checklist
+    const fetchChecklist = async () => {
+        const res = await fetch(`${apiUrl}/checklist`)
+        const data = await res.json()
+        setChecklist(data.checklist)
+    }
 
 
     
@@ -42,6 +50,18 @@ function Menu({ coords }) {
             createMessage('Please select an object in the picture..')
             return
         }
+        //all of a set has been found
+        if (typeof item.found === 'number' && item.found === item.goal) {
+            createMessage(`You already found "${item.name}"`)
+            return
+        }
+        //item was already found
+        if (typeof item.found === 'boolean' && item.found) {
+            createMessage(`You already found that item..`)
+            console.log('you already found that item')
+            return
+        } 
+        //guess object
         const guess = { key: item.key, x: x, y: y}
         const res = await fetch(`${apiUrl}/checklist`,
             {   method: "PUT",
@@ -56,30 +76,19 @@ function Menu({ coords }) {
         
         //test response
         const data = await res.json()
-        console.log(data)
         
+        //data = {key: string, found: boolean}
         const result = data.found
-        console.log(result)
         const key = data.key
+
+        //item was found and is part of a set
         if (item.goal && item.found !== item.goal && result) {
-            setChecklist(prev => 
-                prev.map(item => 
-                    item.key === key ?
-                    { ...item, found: item.found + 1}
-                    : item
-                )
-            )
+            fetchChecklist()
             createMessage(`You found "${item.name}"`)
         }
+        //item was found and not in a set
         else if (!item.found && result) {
-            //ask the backend, you found it!
-            setChecklist(prev => 
-                prev.map(item => 
-                    item.key === key ?
-                    { ...item, found: result}
-                    : item
-                )
-            )
+            fetchChecklist()
             createMessage(`You found "${item.name}"!`)
         } 
         //if answer is correct but item was already found
@@ -93,6 +102,7 @@ function Menu({ coords }) {
             console.log('wrong answer')
         }
     }
+
     //sending the message list to the dialog window
     const [messages, setMessages]= useState(['Welcome to digital iSpy, start searching!'])
     
@@ -102,12 +112,6 @@ function Menu({ coords }) {
     //checklist data
     const [checklist, setChecklist] = useState([])
     useEffect(() => {
-        const fetchChecklist = async () => {
-            const res = await fetch(`${apiUrl}/checklist`)
-            const data = await res.json()
-            console.log(data)
-            setChecklist(data.checklist)
-        }
         fetchChecklist()
     }, [])
     return (
