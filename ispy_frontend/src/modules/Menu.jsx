@@ -2,20 +2,6 @@ import { useState, useEffect } from 'react'
 import styles from './styles/Menu.module.css'
 import Dialog from './Dialog';
 
-const createMessage = (string) => {
-    setMessages(prev => {
-        const next = [...prev]
-        if (next.length === 4) {
-            next.shift()
-        }
-        next.push(`${string}`)
-        return next
-    })
-}
-
-
-
-
 function Menu({ coords }) {
     //internal url
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -38,10 +24,12 @@ function Menu({ coords }) {
         const data = await res.json()
         setChecklist(data.checklist)
     }
-
-
-    
-    
+    //function for initializing game on page load
+    const initGame = async () => {
+        const res = await fetch(`${apiUrl}/reset`)
+        const data = await res.json()
+        setChecklist(data.checklist)
+    }
     //selecting an item
     const onClick = async (e ,item) => {
         
@@ -92,7 +80,7 @@ function Menu({ coords }) {
             createMessage(`You found "${item.name}"`)
         } 
         //if answer is correct but item was already found
-        else if (result ){
+        else if (result){
             createMessage(`You already found "${item.name}"`)
             console.log('you already found that item')
         } 
@@ -105,15 +93,15 @@ function Menu({ coords }) {
 
     //sending the message list to the dialog window
     const [messages, setMessages]= useState(['Welcome to digital iSpy, start searching!'])
-    
     useEffect(() => {
         }, [messages])
 
     //checklist data
     const [checklist, setChecklist] = useState([])
     useEffect(() => {
-        fetchChecklist()
+        initGame()
     }, [])
+    
     return (
         <>
             <div className={styles.checklist}>

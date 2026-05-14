@@ -1,8 +1,10 @@
-let checklist = require('./checklist.js')
+const { structuredClone } = require('node:worker_threads')
+let initialChecklist = require('./checklist.js')
 const _ = require('lodash')
 
 //array for testing
 const array = []
+let checklist
 
 const coordChecker = (x, y, guessX, guessY) => {
     const radius = 40
@@ -19,6 +21,10 @@ const controller = {
         res.status(200).json({message: "Hello World!"})
     },
 
+    resetGet(req, res) {
+        checklist = JSON.parse(JSON.stringify(initialChecklist))
+        res.status(200).json({checklist})
+    },
     checklistGet(req, res) {
         res.status(200).json({checklist})
     },

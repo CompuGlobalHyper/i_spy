@@ -11,7 +11,8 @@ function Dialog({ messages = [] }) {
                 <div className={styles.message + ' ' + styles.op1}>{messages[1] ?? ''}</div>
                 <div className={styles.message + ' ' + styles.op2}>{messages[2] ?? ''}</div>
                 <div className={styles.message + ' ' + styles.op3}>{messages[3] ?? ''}</div>
-                <div className={styles.message + ' ' + styles.op4}>{messages[4] ?? ''}</div>
+                <div className={styles.message + ' ' + styles.op4}
+                     data-text={messages[4] ?? ''}>{messages[4] ?? ''}</div>
             </div>
         </>
     )

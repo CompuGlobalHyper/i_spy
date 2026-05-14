@@ -4,7 +4,7 @@ const { controller } = require('./controllers')
 const router = express.Router()
 
 router.get('/', controller.indexGet)
-
+router.get('/reset', controller.resetGet)
 router.get('/checklist', controller.checklistGet)
 router.put('/checklist', controller.checklistPut)
 
