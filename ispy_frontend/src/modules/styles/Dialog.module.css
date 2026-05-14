@@ -1,19 +1,28 @@
 .container {
+    margin: 10px;
+    background-color: rgb(253, 250, 246);
+    padding: 10px 0 5px 5px;
+    border-radius: 8px;
 
 }
 .message {
+    margin-bottom: 10px;
 
 }
 
 .op0 {
-    opacity: 0.2;
-}
-.op1 {
     opacity: 0.4;
 }
-.op2 {
+.op1 {
     opacity: 0.6;
 }
-.op3 {
+.op2 {
     opacity: 0.8;
+}
+.op3 {
+    opacity: 1;
+}
+.op4 {
+    font-weight: bold;
+    opacity: 1;
 }

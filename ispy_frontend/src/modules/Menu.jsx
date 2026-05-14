@@ -25,7 +25,7 @@ function Menu({ coords }) {
     const createMessage = (string) => {
         setMessages(prev => {
             const next = [...prev]
-            if (next.length === 4) {
+            if (next.length === 5) {
                 next.shift()
             }
             next.push(`${string}`)
@@ -89,7 +89,7 @@ function Menu({ coords }) {
         //item was found and not in a set
         else if (!item.found && result) {
             fetchChecklist()
-            createMessage(`You found "${item.name}"!`)
+            createMessage(`You found "${item.name}"`)
         } 
         //if answer is correct but item was already found
         else if (result ){
