@@ -19,27 +19,37 @@ const controller = {
         res.status(200).json({message: "Hello World!"})
     },
 
+    checklistGet(req, res) {
+        res.status(200).json({checklist})
+    },
     checklistPut(req, res) {
         const { guess } = req.body
-        console.log(guess)
         const guessKey = guess.key
         const guessX = guess.x
         const guessY = guess.y
 
         const answerArray = checklist.filter((item) => item.key === guessKey)
         const answer = answerArray[0]
+        const trueKey = answer.key
         if (answer.multi) {
             const answerList = answer.items
-            const data = answerList
+            console.log(answerList)
+            const dataList = answerList
             .filter(item => item.found === false)
-            .map((item) => {
+            .filter(item => {
                 const x = item.location.x
                 const y = item.location.y
-                if (coordChecker(x, y, guessX, guessY)) {
-                    return { key: item.key, found: true }
-                }
+                return coordChecker(x, y, guessX, guessY)
             })
-            return res.status(200).json(data)
+            if (dataList.length > 0) {
+                checklist.map(item => {
+                    if (item.multi) {
+
+                    }
+                })
+                return res.status(200).json({key: trueKey, found: true})
+            } else return res.status(200).json({key: trueKey, found: false})
+            
         } else {
             const x = answer.location.x
             const y = answer.location.y

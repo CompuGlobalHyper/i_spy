@@ -5,10 +5,11 @@ const router = express.Router()
 
 router.get('/', controller.indexGet)
 
-router.get('/test', controller.testGet)
-router.post('/test', controller.testPost)
+router.get('/checklist', controller.checklistGet)
 router.put('/checklist', controller.checklistPut)
 
+router.get('/test', controller.testGet)
+router.post('/test', controller.testPost)
 router.put('/checklist', controller.testChecklistPut)
 
 module.exports = router

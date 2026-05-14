@@ -69,8 +69,7 @@ function Menu({ coords }) {
                     : item
                 )
             )
-            
-            console.log(`The key is now ${key}`)
+            createMessage(`You found "${item.name}"`)
         }
         else if (!item.found && result) {
             //ask the backend, you found it!
@@ -100,22 +99,17 @@ function Menu({ coords }) {
     useEffect(() => {
         }, [messages])
 
-    //test checklist data
-    const [checklist, setChecklist] = useState(
-        [
-        { key: "clock", name: "A clock", found: false },
-        { key: "birdhouse", name: "A birdhouse", found: true },
-        { key: "duck", name: "A duck", found: false },
-        { key: "thimbles", name: "Five thimbles", found: 2, goal: 5 },
-        { key: "plane", name: "A plane", found: false },
-        { key: "fishTruck", name: "Two fish in a truck", found: false },
-        { key: "apple", name: "A big red apple", found: true },
-        { key: "jeep", name: "A zebra jeep", found: false },
-        { key: "stop", name: "STOP", found: false },
-        { key: "go", name: "GO", found: false },
-        { key: "beeps", name: "BEEP, BEEP, BEEP", found: 3, goal: 3 }
-        ]
-    )
+    //checklist data
+    const [checklist, setChecklist] = useState([])
+    useEffect(() => {
+        const fetchChecklist = async () => {
+            const res = await fetch(`${apiUrl}/checklist`)
+            const data = await res.json()
+            console.log(data)
+            setChecklist(data.checklist)
+        }
+        fetchChecklist()
+    }, [])
     return (
         <>
             <div className={styles.checklist}>
