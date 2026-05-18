@@ -48,7 +48,6 @@
 
 .leaderboardButton:hover {
     cursor: pointer;
-    font-weight: bold;
 }
 
 .highscoreParent {
@@ -57,4 +56,15 @@
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.closeButton {
+    cursor: pointer;
+    background-color: rgb(255, 255, 251);
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 138);
+    border-radius: 8px;
+    padding: 5px 10px 5px 10px;
+    margin: 20px 20px 10px 10px;
+
 }

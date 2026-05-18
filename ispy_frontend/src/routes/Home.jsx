@@ -8,13 +8,20 @@ import Highscore from "../modules/Highscore.jsx"
 
 
 function Home() {
+    //win state 
+    const [won, setWon] = useState(false)
     //leaderboard
     const [leaderboard, setLeaderboard] = useState([
-        {name: "AAA", points: 999},
-        {name: "PC", points: 767},
-        {name: "ASC", points: 541},
-        {name: "GL", points: 901}
+        {id: 1, name: "AAA", points: 999},
+        {id: 2, name: "PC", points: 767},
+        {id: 3, name: "ASC", points: 541},
+        {id: 4, name: "GL", points: 901}
     ])
+
+    const sortLeaderboard = () => {
+        const newLeaderboard = leaderboard.sort((a, b) => b.points - a.points)
+        setLeaderboard(newLeaderboard)
+    }
 
     const [viewHighscore, setViewHighscore] = useState(false)
 
@@ -157,8 +164,11 @@ function Home() {
 
     //checklist data
     const [checklist, setChecklist] = useState([])
+    
+    //upon refresh
     useEffect(() => {
         initGame()
+        sortLeaderboard()
     }, [])
 
     const checkmarkArray = checklist.map((item) => {
@@ -195,7 +205,8 @@ function Home() {
                 <div className={styles.highscoreParent}>
                     {viewHighscore ? 
                     <>
-                        <Highscore leaderboard={leaderboard}></Highscore>
+                        <Highscore leaderboard={leaderboard}
+                        won={won}></Highscore>
                         <div className={styles.closeButton} onClick={handleLeaderboardClick}>Close leaderboard</div>
                     </> : <></>}
                 </div>

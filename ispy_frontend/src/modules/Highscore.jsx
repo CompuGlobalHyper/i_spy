@@ -15,13 +15,14 @@ function Highscore({leaderboard, won}) {
                 </div> : <></>}
                 <div className={styles.header}>Leaderboard:</div>
                 <div className={styles.leaderboardContainer}>
-                    <ul>
+                    <ul className={styles.list}>
                         {leaderboard.map((player) => {
-                            <li>
+                            return (
+                            <li key={player.id} className={styles.item}>
                                 <span>{player.name}</span>
                                 <span>{player.points}</span>
                             </li>
-                        })}
+                        )})}
                     </ul>
                 </div>
             </div>
