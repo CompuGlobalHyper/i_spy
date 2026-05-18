@@ -2,6 +2,16 @@
     width: 100vw;
     height: 100vh;
     position: relative;
+    overflow: hidden;
+}
+
+.opaque {
+    z-index: 1;
+    position: absolute;
+    background-color: black;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
 }
 
 .bckgrdImage{
@@ -25,4 +35,26 @@
 .image {
     max-width: 100%;
     height: auto;
+}
+
+.leaderboardButton {
+    background-color: rgb(255, 255, 251);
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 138);
+    border-radius: 8px;
+    padding: 5px 0px 5px 10px;
+    margin: 20px 20px 10px 10px;
+}
+
+.leaderboardButton:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.highscoreParent {
+    z-index: 2;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

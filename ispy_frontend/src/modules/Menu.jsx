@@ -11,7 +11,7 @@ function Menu({ coords, checklist, messages, onClick }) {
         <>
             <div className={styles.checklist}>
                 <ul className={styles.list}>
-                    <div className={styles.listTitle}>What do you spy?</div>
+                    <div className={styles.listTitle}><span>iSpy Checklist</span></div>
                     {checklist.map((item) => {
                         if (typeof item.found === 'number') {
                             return (

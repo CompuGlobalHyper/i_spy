@@ -9,7 +9,26 @@ import Highscore from "../modules/Highscore.jsx"
 
 function Home() {
     //leaderboard
-    const [leaderboard, setLeaderboard] = useState([])
+    const [leaderboard, setLeaderboard] = useState([
+        {name: "AAA", points: 999},
+        {name: "PC", points: 767},
+        {name: "ASC", points: 541},
+        {name: "GL", points: 901}
+    ])
+
+    const [viewHighscore, setViewHighscore] = useState(false)
+
+    //on leaderboard click
+
+    const handleLeaderboardClick = (e) => {
+        if (!viewHighscore) {
+            setViewHighscore(true)
+        } else {
+            setViewHighscore(false)
+        }
+
+
+    }
     
     //internal url
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -17,9 +36,6 @@ function Home() {
      //targetbox
     const [viewTargetBox, setViewTargetBox] = useState(false)
     const [coords, setCoords] = useState( { x: 0, y: 0 })
-
-    //highscore window
-    const [viewHighscore, setViewHighscore] = useState(false)
 
     //function for initializing game on page load
     const initGame = async () => {
@@ -109,7 +125,7 @@ function Home() {
     }
     
     //when picture is clicked
-    const handleClick = (e) => {
+    const handlePictureClick = (e) => {
         if (e.target !== e.currentTarget) {
             return
         }
@@ -155,24 +171,33 @@ function Home() {
 
     return (
         <>
-            <div className={ styles.bckgrdImageContainer}>
+            <div className={`${styles.bckgrdImageContainer}`} >
+                { viewHighscore ? <div className={styles.opaque}></div> : <></> }
                 <img className={ styles.bckgrdImage } src={ Background } alt="" />
                 <div className={styles.imageContainer}>
-                    <Menu coords={coords} 
-                    checklist={checklist}
-                    messages={messages} 
-                    onClick={onClick}></Menu>
+                    <div className={styles.menuContainer}>
+                        <Menu coords={coords} 
+                        checklist={checklist}
+                        messages={messages} 
+                        onClick={onClick}>
+                        </Menu>
+                        <div className={styles.leaderboardButton} 
+                        onClick={handleLeaderboardClick}>View leaderboard..</div>
+                    </div>
                     { viewTargetBox ? 
                     <>
                         <TargetBox coords={coords} ></TargetBox>
                     </>
                      : 
                     <></>}
-                    <img className={ styles.image } src={ Image } alt="" onClick={handleClick}/>
-                    <div onClick={() => {}}>View leaderboard</div>
-                    <div>
-                        {viewHighscore ? <Highscore leaderboard={leaderboard}></Highscore> : <></>}
-                    </div>
+                    <img className={ styles.image } src={ Image } alt="" onClick={handlePictureClick}/>
+                </div>
+                <div className={styles.highscoreParent}>
+                    {viewHighscore ? 
+                    <>
+                        <Highscore leaderboard={leaderboard}></Highscore>
+                        <div className={styles.closeButton} onClick={handleLeaderboardClick}>Close leaderboard</div>
+                    </> : <></>}
                 </div>
             </div>
             

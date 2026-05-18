@@ -1,10 +1,29 @@
 import styles from "./styles/Highscore.module.css"
 
-function Highscore({leaderboard}) {
+function Highscore({leaderboard, won}) {
     return (
         <>
-            <div>
-                Hello World
+            <div className={styles.container}>
+                {won ? 
+                <div className={styles.formContainer}>
+                    <div className={styles.header}>Congrats, you did it!!!</div>
+                    <form>
+                        <label htmlFor="name"></label>
+                        <input type="text" name="name" id="name" />
+                        <button>Submit highscore!</button>
+                    </form>
+                </div> : <></>}
+                <div className={styles.header}>Leaderboard:</div>
+                <div className={styles.leaderboardContainer}>
+                    <ul>
+                        {leaderboard.map((player) => {
+                            <li>
+                                <span>{player.name}</span>
+                                <span>{player.points}</span>
+                            </li>
+                        })}
+                    </ul>
+                </div>
             </div>
         </>
     )
