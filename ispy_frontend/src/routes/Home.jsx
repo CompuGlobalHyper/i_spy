@@ -4,15 +4,22 @@ import Image from "../assets/ispypic.jpg"
 import Background from "../assets/background.png"
 import TargetBox from "../modules/TargetBox";
 import Menu from "../modules/Menu"
+import Highscore from "../modules/Highscore.jsx"
 
 
 function Home() {
+    //leaderboard
+    const [leaderboard, setLeaderboard] = useState([])
+    
     //internal url
     const apiUrl = import.meta.env.VITE_API_URL;
 
      //targetbox
     const [viewTargetBox, setViewTargetBox] = useState(false)
     const [coords, setCoords] = useState( { x: 0, y: 0 })
+
+    //highscore window
+    const [viewHighscore, setViewHighscore] = useState(false)
 
     //function for initializing game on page load
     const initGame = async () => {
@@ -43,7 +50,7 @@ function Home() {
     const onClick = async (e ,item) => {
 
         const { x, y } = coords
-        
+
         //if no answer is chosen
         if (x === 0 && y === 0) {
             createMessage('Please select an object in the picture..')
@@ -137,6 +144,13 @@ function Home() {
     useEffect(() => {
         initGame()
     }, [])
+
+    const checkmarkArray = checklist.map((item) => {
+        if (item.multi) {
+            item.items.map
+        }
+
+    })
     
 
     return (
@@ -155,6 +169,10 @@ function Home() {
                      : 
                     <></>}
                     <img className={ styles.image } src={ Image } alt="" onClick={handleClick}/>
+                    <div onClick={() => {}}>View leaderboard</div>
+                    <div>
+                        {viewHighscore ? <Highscore leaderboard={leaderboard}></Highscore> : <></>}
+                    </div>
                 </div>
             </div>
             

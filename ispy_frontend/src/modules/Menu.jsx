@@ -3,8 +3,6 @@ import styles from './styles/Menu.module.css'
 import Dialog from './Dialog';
 
 function Menu({ coords, checklist, messages, onClick }) {
-    //internal url
-    const apiUrl = import.meta.env.VITE_API_URL;
     //coords passed down from Home
     const { x, y } = coords
     
