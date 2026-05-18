@@ -16,7 +16,7 @@ function Menu({ coords, checklist, messages, onClick }) {
                         if (typeof item.found === 'number') {
                             return (
                             <li key={item.key}
-                                data-text={item.name}
+                                data-text={item.name + ` (Found: ${item.found})`}
                                 className=
                                 {[item.found === item.goal ? styles.trueItem : styles.falseItem, 
                                   styles.item].join(' ')}

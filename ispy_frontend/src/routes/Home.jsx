@@ -73,6 +73,8 @@ function Home() {
     const onClick = async (e ,item) => {
 
         const { x, y } = coords
+        setViewTargetBox(false)
+        setCoords({ x: 0, y: 0})
 
         //if no answer is chosen
         if (x === 0 && y === 0) {
@@ -134,7 +136,7 @@ function Home() {
     //when picture is clicked
     const handlePictureClick = (e) => {
         if (e.target !== e.currentTarget) {
-            return
+            return console.log('failed click')
         }
         if (coords.x !== 0) {
             setCoords({ x: 0, y: 0})

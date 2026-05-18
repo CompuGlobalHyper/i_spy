@@ -27,7 +27,7 @@
 .imageContainer {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100vw;
     height: 100vh;
 }
@@ -35,6 +35,10 @@
 .image {
     max-width: 100%;
     height: auto;
+}
+
+.menuContainer {
+    overflow-y: auto;
 }
 
 .leaderboardButton {
