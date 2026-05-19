@@ -18,7 +18,7 @@ function Highscore({leaderboard, win}) {
                     <div className={styles.header}>Congrats, you did it!!!</div>
                     <form className={styles.form}>
                         <label htmlFor="name"></label>
-                        <input className={styles.input}type="text" name="name" id="name" placeholder="ABC" maxLength={3} minLength={3} 
+                        <input className={styles.input}type="text" name="name" id="name" placeholder="ABC.." maxLength={3} minLength={3} 
                         onChange={(e) => {
                             toUpper(e.target.value)
                         }} value={username}/>

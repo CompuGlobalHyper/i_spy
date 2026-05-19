@@ -17,6 +17,17 @@ const coordChecker = (x, y, guessX, guessY) => {
     } else return false
 }
 
+const pointCalc = (start, end) => {
+    const max = 300
+    const min = 30
+    const seconds = (end - start) / 1000
+
+    let time = Math.min(Math.max(seconds, min), max)
+    const normalized = (max - time) / (max - min)
+    return Math.round(999 * normalized)
+
+}
+
 const checkWin = (checklist) => {
     for (let item of checklist) {
         if (!item.found) return false
@@ -32,7 +43,8 @@ const controller = {
 
     resetGet(req, res) {
         checklist = JSON.parse(JSON.stringify(initialChecklist))
-        res.status(200).json({checklist})
+        const startTime = Date.now() 
+        res.status(200).json({checklist, startTime})
     },
     checklistGet(req, res) {
         res.status(200).json({checklist})
