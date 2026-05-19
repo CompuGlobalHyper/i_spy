@@ -13,9 +13,9 @@ function Home() {
     //leaderboard
     const [leaderboard, setLeaderboard] = useState([
         {id: 1, name: "AAA", points: 999},
-        {id: 2, name: "PC", points: 767},
+        {id: 2, name: "PHC", points: 767},
         {id: 3, name: "ASC", points: 541},
-        {id: 4, name: "GL", points: 901}
+        {id: 4, name: "GLE", points: 901}
     ])
 
     const sortLeaderboard = () => {
@@ -24,6 +24,7 @@ function Home() {
     }
 
     const [viewHighscore, setViewHighscore] = useState(false)
+    const [win, setWin] = useState(true)
 
     //on leaderboard click
 
@@ -104,10 +105,10 @@ function Home() {
                 })
              }
         )
-        //test response
+        //response
         const data = await res.json()
         
-        //data = {key: string, found: boolean}
+        //data = {key: string, found: boolean, won: boolean}
         const result = data.found
         const key = data.key
 
@@ -130,6 +131,10 @@ function Home() {
         else {
             createMessage(`Nothing there, keep looking!`)
             console.log('wrong answer')
+        }
+        setWin(data.win)
+        if (win) {
+            setViewHighscore(true)
         }
     }
     
@@ -208,7 +213,7 @@ function Home() {
                     {viewHighscore ? 
                     <>
                         <Highscore leaderboard={leaderboard}
-                        won={won}></Highscore>
+                        win={win}></Highscore>
                         <div className={styles.closeButton} onClick={handleLeaderboardClick}>Close leaderboard</div>
                     </> : <></>}
                 </div>

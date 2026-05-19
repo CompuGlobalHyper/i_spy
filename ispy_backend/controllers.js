@@ -6,14 +6,23 @@ const _ = require('lodash')
 const array = []
 let checklist
 
+//checking if coord is in target box
 const coordChecker = (x, y, guessX, guessY) => {
-    const radius = 40
+    const radius = 50
     const dx = guessX - x
     const dy = guessY - y
     if ((dx * dx) + (dy * dy) < radius * radius) {
         console.log("answer found")
         return true
     } else return false
+}
+
+const checkWin = (checklist) => {
+    for (let item of checklist) {
+        if (!item.found) return false
+        if (item.multi && !checkWin(item.items)) return false
+    }
+    return true
 }
 
 const controller = {
@@ -69,7 +78,10 @@ const controller = {
         if (isFound) {
             checklist = newChecklist
         }
-        return res.status(200).json({key: guessKey, found: isFound})
+
+        const win = checkWin(checklist)
+
+        return res.status(200).json({key: guessKey, found: isFound, win: win})
     },
     //tests
     testGet(req, res) {

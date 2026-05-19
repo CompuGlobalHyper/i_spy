@@ -10,6 +10,30 @@
     margin: 20px 20px 10px 10px;
 }
 
+.formContainer {
+    padding: 10px 10px 15px 10px;
+    border-bottom: 0.5px solid rgb(148, 148, 148);
+    margin-bottom: 20px;
+}
+.header {
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    padding-bottom: 10px;
+}
+.form {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+.input {
+    width: 50px;
+    padding-left: 4px;
+}
+
+.button {
+    padding: 2px 5px;
+}
 .leaderboardContainer {
     display: flex;
 }
@@ -17,9 +41,22 @@
 .list {
     list-style: none;
     width: 100%;
+    margin: 0px 40px;
 }
-
 .item {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.item > :first-child {
+    margin-right: auto;
+    height: 20px;
+    width: 30px;
+}
+.dots {
+    max-width: 70px;
+    margin: 0px auto 8px auto;
+    flex: 1;
+    border-bottom: 2px dotted black;
 }
